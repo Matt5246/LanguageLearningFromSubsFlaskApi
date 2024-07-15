@@ -1,6 +1,15 @@
 from flask import Flask, request, jsonify
 import spacy
 from transformers import MarianMTModel, MarianTokenizer
+import psutil
+
+def print_memory_usage():
+    process = psutil.Process()
+    mem_info = process.memory_info()
+    print(f"Memory Usage: {mem_info.rss / 1024 / 1024} MB")
+
+# Call this function at the start of your app
+print_memory_usage()
 
 app = Flask(__name__)
 
