@@ -1,7 +1,7 @@
 # Ignore virtual environment
 .venv/
+.venv
 env/
-
 # Ignore compiled Python files
 *.pyc
 __pycache__/
@@ -22,4 +22,3 @@ __pycache__/
 Thumbs.db
 .cache/
 .pytest_cache/
-lib/
