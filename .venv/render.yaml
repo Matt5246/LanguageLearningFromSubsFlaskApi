@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: LanguageLearningFromSubsFlaskApi
-    env: python
-    plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn -c gunicorn_config.py wsgi:app
