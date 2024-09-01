@@ -3,13 +3,13 @@ import spacy
 from transformers import MarianMTModel, MarianTokenizer
 import psutil
 
-def print_memory_usage():
-    process = psutil.Process()
-    mem_info = process.memory_info()
-    print(f"Memory Usage: {mem_info.rss / 1024 / 1024} MB")
+# def print_memory_usage():
+#     process = psutil.Process()
+#     mem_info = process.memory_info()
+#     print(f"Memory Usage: {mem_info.rss / 1024 / 1024} MB")
 
-# Call this function at the start of your app
-print_memory_usage()
+# # Call this function at the start of your app
+# print_memory_usage()
 
 app = Flask(__name__)
 
@@ -63,4 +63,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=False, port=8080)
