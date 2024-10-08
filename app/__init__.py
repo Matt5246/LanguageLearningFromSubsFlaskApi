@@ -13,7 +13,11 @@ import psutil
 
 app = Flask(__name__)
 
-nlp = spacy.load('de_core_news_md')
+nlp_de = spacy.load('de_core_news_md')
+nlp_ja = spacy.load('ja_core_news_md')
+nlp_en = spacy.load('en_core_web_md')
+nlp_pl = spacy.load('pl_core_news_md')
+nlp_zh = spacy.load('zh_core_web_md')
 
 model_name = 'Helsinki-NLP/opus-mt-de-en'
 tokenizer = MarianTokenizer.from_pretrained(model_name)
@@ -26,8 +30,23 @@ def analyze_text():
         return jsonify({'error': 'No word provided in the request body'}), 400
 
     word = data['word']
+    sourceLang = data['sourceLang']
+    doc = None
+    if not sourceLang:
+        return jsonify({'error': 'Source language is required'}), 400
+    if sourceLang == 'de':
+        doc = nlp_de(word)
+    elif sourceLang == 'ja':
+        doc = nlp_ja(word)
+    elif sourceLang == 'en':
+        doc = nlp_en(word)
+    elif sourceLang == 'pl':
+        doc = nlp_pl(word)
+    elif sourceLang == 'zh':
+        doc = nlp_zh(word)
+    else:
+        return jsonify({'error': f"Source language is not currently used {sourceLang}"}), 400
 
-    doc = nlp(word)
     tokens_with_pos = {'lemma': doc[0].lemma_, 'pos': doc[0].pos_}
     print(word,tokens_with_pos)
     return jsonify({'result': tokens_with_pos})
