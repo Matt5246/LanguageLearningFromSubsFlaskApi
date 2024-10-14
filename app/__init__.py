@@ -58,7 +58,7 @@ def frequencyCheck():
 
         for word in unique_words:
             cleaned_word = word.strip().lower()
-            doc = nlp(cleaned_word)
+            doc = nlp_de(cleaned_word)
 
             if len(doc) > 0:
                 lemma = doc[0].lemma_.strip().lower()
